@@ -223,19 +223,31 @@ async def lifespan(app:FastAPI):
 app=FastAPI(title='Dee’s Laundromat API',version='1.0.0',docs_url='/api/docs',openapi_url='/api/openapi.json',lifespan=lifespan)
 
 @app.middleware('http')
-async def security(request:Request,call_next):
- if request.url.path.startswith('/api') and request.method not in ('GET','HEAD','OPTIONS'):
-  origin=request.headers.get('origin')
-  host_origin=f'{request.url.scheme}://{request.headers.get("host")}'
-  if origin and origin!=host_origin and origin not in ALLOWED_ORIGINS:
-   return Response(status_code=403,content='Origin not allowed')
-  if request.headers.get('x-requested-with')!='DeesWeb':
-   return Response(status_code=403,content='Missing request header')
- response=await call_next(request)
- response.headers['X-Content-Type-Options']='nosniff'
- response.headers['Referrer-Policy']='strict-origin-when-cross-origin'
- response.headers['X-Frame-Options']='DENY'
- return response
+async def security(request: Request, call_next):
+    print("DEBUG REQUEST:", {
+        "origin": repr(request.headers.get("origin")),
+        "host": repr(request.headers.get("host")),
+        "allowed": repr(ALLOWED_ORIGINS),
+        "method": request.method,
+        "path": request.url.path,
+    }, flush=True)
+
+    if request.url.path.startswith('/api') and request.method not in ('GET', 'HEAD', 'OPTIONS'):
+        origin = request.headers.get('origin')
+        host_origin = f'{request.url.scheme}://{request.headers.get("host")}'
+
+        if origin and origin != host_origin and origin not in ALLOWED_ORIGINS:
+            return Response(status_code=403, content='Origin not allowed')
+
+        if request.headers.get('x-requested-with') != 'DeesWeb':
+            return Response(status_code=403, content='Missing request header')
+
+    response = await call_next(request)
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['X-Frame-Options'] = 'DENY'
+
+    return response
 
 # Local testing lets the frontend reach API via the Next.js same-origin rewrite.
 def token_digest(token):return hashlib.sha256(token.encode()).hexdigest()
