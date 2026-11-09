@@ -19,7 +19,11 @@ USING_POSTGRES = bool(DATABASE_URL)
 DEMO = os.getenv('DEMO_MODE', 'true').lower() == 'true'
 SECURE_COOKIES = os.getenv('COOKIE_SECURE', 'false').lower() == 'true'
 SESSION_MAX_AGE = 7 * 24 * 3600
-ALLOWED_ORIGINS = set(s.strip() for s in os.getenv('ALLOWED_ORIGINS', '').split(',') if s.strip())
+ALLOWED_ORIGINS = {
+    s.strip().strip('"').strip("'").rstrip('/')
+    for s in os.getenv('ALLOWED_ORIGINS', '').split(',')
+    if s.strip()
+}
 SERVICE_SEED = [
  ('wash','Wash & Fold','Everyday laundry, washed, dried and neatly folded.',12,'kg','/images/order-1.webp'),
  ('dry','Dry Cleaning','Care for suits, dresses, jackets and delicates.',25,'item','/images/order-2.webp'),
