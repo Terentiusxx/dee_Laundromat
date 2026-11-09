@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+*.log
+*.tsbuildinfo
+__pycache__/
+.pytest_cache/
+*.sqlite3
+*.sqlite3-*
+.env*
+!.env.example

@@ -1,0 +1,4 @@
+"use client";
+import {useEffect,useState} from 'react';import Link from 'next/link';
+import {send} from '../lib/api';import {PublicLayout,publicStyles as s} from '../components/PublicLayout';
+export default function VerifyEmail(){const [notice,setNotice]=useState('Verifying…');useEffect(()=>{const token=new URLSearchParams(window.location.search).get('token');if(!token){setNotice('Missing verification token');return;}send('/auth/verification/confirm','POST',{token}).then(()=>setNotice('Email verified. You can return to Account Settings.')).catch(e=>setNotice((e as Error).message));},[]);return <PublicLayout><section className={`${s.pageHero} ${s.container}`}><h1>Verify your email.</h1><p role="status">{notice}</p><Link href="/account-settings" className={s.primary}>Account Settings</Link></section></PublicLayout>}

@@ -1,0 +1,166 @@
+.page {
+  --gutter: clamp(0px, 3.64584vw, 56px);
+  display: grid;
+  grid-template-columns: minmax(0, 42.9054%) minmax(0, 57.0946%);
+  width: calc(100% - var(--gutter));
+  margin-left: var(--gutter);
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  background: #fffefd;
+}
+
+.formPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding: 44px clamp(30px, 5.1vw, 75px) 42px;
+  background: linear-gradient(120deg, #fff, #fffefc 76%, #fff);
+}
+.brand { display: inline-flex; align-items: center; align-self: flex-start; gap: 14px; text-decoration: none; color: var(--navy); }
+.brandMark { width: 44px; height: 44px; flex: none; }
+.brandWords { display: flex; flex-direction: column; gap: 0; }
+.brandName { font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: 30px; letter-spacing: -.8px; white-space: nowrap; line-height: 1.08; }
+.brandTagline { margin-top: 4px; font-size: 9px; font-weight: 700; letter-spacing: 2.15px; }
+
+.formContent { width: 100%; max-width: 486px; margin-top: 87px; }
+.eyebrow, .visualEyebrow { margin: 0; font-size: 13px; line-height: 22px; letter-spacing: 3.45px; font-weight: 700; color: #4b8fbc; }
+.heading { font-family: 'Newsreader', Georgia, serif; font-weight: 500; color: #20354a; font-size: clamp(39px, 3.05vw, 47px); letter-spacing: -.75px; line-height: 1.08; margin: 16px 0 12px; }
+.intro { color: #596879; font-size: 16px; line-height: 1.72; max-width: 455px; margin: 14px 0 36px; }
+.form { display: flex; flex-direction: column; gap: 21px; }
+.field { display: flex; flex-direction: column; gap: 10px; }
+.field label { font-size: 14px; font-weight: 600; letter-spacing: -.2px; }
+.inputWrap { display: flex; height: 53px; align-items: center; gap: 14px; border-radius: 5px; border: 1px solid #cdd8e1; background: #fff; padding: 0 16px; color: #576a7a; transition: border-color .2s, box-shadow .2s; }
+.inputWrap:focus-within { border-color: #4c91bf; box-shadow: 0 0 0 3px rgba(75,140,185,.13); }
+.inputWrap input { min-width: 0; flex: 1; height: 100%; font-size: 14px; background: transparent; border: 0; outline: none; color: #233548; }
+.inputWrap input::placeholder { color: #8190a0; opacity: 1; }
+.revealButton { background: transparent; border: none; color: #546577; line-height: 0; padding: 8px; margin-right: -8px; }
+.revealButton:hover { color: #233548; }
+.optionsRow { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 3px; }
+.remember { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; white-space: nowrap; }
+.remember input { appearance: none; background: white; margin: 0; width: 20px; height: 20px; border: 1px solid #8594a4; border-radius: 3px; flex-shrink: 0; cursor: pointer; }
+.remember input:checked { background: #233548; border-color: #233548; }
+.remember input:checked::after { content: ''; display: block; width: 9px; height: 5px; border-left: 2px solid white; border-bottom: 2px solid white; transform: translate(4px, 4px) rotate(-45deg); }
+.textLink { color: #3885b7; text-underline-offset: 2px; }
+.textLink:hover { color: #1e628f; }
+.optionsRow .textLink { font-size: 14px; white-space: nowrap; }
+.loginButton { position: relative; height: 53px; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 12px; background: #233548; color: #fff; font-size: 16px; font-weight: 600; border: 1px solid #233548; border-radius: 5px; transition: background .2s, transform .2s; }
+.loginButton:hover { background: #344b61; transform: translateY(-1px); }
+.status { margin: -2px 0 0; font-size: 13px; line-height: 1.5; color: #476878; }
+.divider { display: flex; align-items: center; gap: 16px; color: #6b7783; font-size: 14px; margin-top: 30px; margin-bottom: 27px; white-space: nowrap; }
+.divider::before, .divider::after { content: ''; height: 1px; background: #d8dfe6; flex: 1; }
+.socialRow { display: grid; grid-template-columns: 1fr 1fr; gap: 21px; }
+.socialButton { display: flex; align-items: center; justify-content: center; gap: 12px; background: #fff; height: 53px; border: 1px solid #cdd8e1; border-radius: 5px; font-size: 13px; font-weight: 600; color: #1f3247; white-space: nowrap; transition: border-color .2s, background .2s; }
+.socialButton:hover { background: #f7fafc; border-color: #9bafbf; }
+.registerPrompt { text-align: center; font-size: 14px; margin: 53px 0 0; }
+
+.visualPanel { position: relative; min-width: 0; min-height: 0; height: 100%; overflow: hidden; background: #dfebf5; }
+.visualImage { position: absolute; inset: 0; background-image: url('/images/login-right-background.webp'); background-position: center 52%; background-size: cover; background-repeat: no-repeat; }
+.backHome { position: absolute; top: 46px; right: clamp(28px, 3.6vw, 56px); z-index: 2; display: inline-flex; align-items: center; gap: 10px; color: #21364b; text-decoration: none; font-size: 14px; font-weight: 500; }
+.backHome:hover { text-decoration: underline; text-underline-offset: 4px; }
+.visualCopy { position: absolute; top: 183px; left: 8.7%; z-index: 1; color: #20354a; max-width: 470px; }
+.visualEyebrow { margin-bottom: 28px; }
+.visualCopy h2 { font-family: 'Newsreader', Georgia, serif; font-size: clamp(49px, 3.85vw, 60px); font-weight: 500; letter-spacing: -1.2px; line-height: 1.03; margin: 0; }
+.smallRule { display: block; height: 1px; width: 42px; background: #27475d; margin-top: 31px; margin-bottom: 24px; }
+.visualDescription { color: #30485e; margin: 0; font-size: 16px; line-height: 1.72; font-weight: 400; }
+.featureBar { position: absolute; left: 7.6%; right: 6%; bottom: 7.1%; z-index: 1; min-height: 123px; padding: 23px 29px; border-radius: 19px; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; background: rgba(255,255,255,.97); box-shadow: 0 12px 40px rgba(32,53,74,.065); }
+.feature { display: flex; align-items: flex-start; gap: 14px; min-width: 0; padding-right: 12px; }
+.feature + .feature { border-left: 1px solid #d2dce5; padding-left: 18px; }
+.featureIcon { display: flex; width: 48px; height: 48px; flex: 0 0 48px; align-items: center; justify-content: center; border-radius: 50%; background: #fff; color: #233548; }
+.feature h3 { font-size: 12px; font-weight: 700; line-height: 1.5; margin: 4px 0 4px; color: #223548; }
+.feature p { font-size: 11px; line-height: 1.7; margin: 0; color: #4c5c6d; }
+
+@media (max-width: 1330px) {
+  .formPanel { padding-left: clamp(30px,4vw,65px); padding-right: clamp(30px,4vw,65px); }
+  .brandName { font-size: 27px; }
+  .socialRow { gap: 10px; }
+  .socialButton { font-size: 12px; }
+  .featureBar { padding: 17px 15px; }
+  .feature { gap: 8px; padding-right: 6px; }
+  .feature + .feature { padding-left: 8px; }
+  .featureIcon { width: 36px; height: 36px; flex-basis: 36px; }
+  .featureIcon svg { width: 22px; height: 22px; }
+  .feature p { font-size: 10px; }
+}
+@media (max-width: 1050px) {
+  .page { grid-template-columns: minmax(0, 48%) minmax(0, 52%); }
+  .formPanel { padding-left: 30px; padding-right: 30px; }
+  .formContent { margin-top: 72px; }
+  .brandName { font-size: 24px; }
+  .brandTagline { letter-spacing: 1.5px; font-size: 8px; }
+  .visualCopy { left: 6%; top: 165px; }
+  .visualCopy h2 { font-size: 46px; }
+  .visualDescription { font-size: 14px; }
+  .featureBar { left: 4%; right: 4%; padding: 12px; }
+  .feature h3 { font-size: 11px; }
+  .feature p { display: none; }
+  .feature { align-items: center; }
+}
+@media (max-width: 760px) {
+  .page { width: 100%; margin-left: 0; display: block; height: auto; min-height: 100dvh; overflow: visible; }
+  .formPanel { height: auto; min-height: 100dvh; overflow: visible; padding: 30px 22px 45px; align-items: center; }
+  .brand { align-self: flex-start; width: min(100%, 480px); margin: 0 auto; }
+  .formContent { max-width: 480px; margin-top: 68px; }
+  .heading { font-size: 43px; }
+  .visualPanel { display: none; }
+  .intro { max-width: 430px; }
+  .registerPrompt { margin-top: 43px; }
+}
+@media (max-width: 420px) {
+  .brand { gap: 10px; }
+  .brandMark { width: 38px; height: 38px; }
+  .brandName { font-size: 24px; }
+  .brandTagline { font-size: 7px; }
+  .heading { font-size: 39px; }
+  .formContent { margin-top: 54px; }
+  .intro { font-size: 14px; }
+  .optionsRow { flex-wrap: wrap; }
+  .socialRow { grid-template-columns: 1fr; gap: 10px; }
+  .socialButton { font-size: 13px; }
+}
+
+/* Keep the desktop composition within the first viewport on laptop screens.
+   The left column may scroll independently on unusually short screens instead
+   of cutting off authentication controls or stretching the photo. */
+@media (min-width: 761px) and (max-height: 950px) {
+  .formPanel { padding-top: 26px; padding-bottom: 20px; }
+  .formContent { margin-top: clamp(25px, 5.1vh, 54px); }
+  .heading { margin-top: 9px; margin-bottom: 8px; }
+  .intro { margin-top: 9px; margin-bottom: 22px; line-height: 1.55; }
+  .form { gap: 14px; }
+  .field { gap: 7px; }
+  .inputWrap, .loginButton, .socialButton { height: 47px; }
+  .loginButton { margin-top: 4px; }
+  .divider { margin-top: 18px; margin-bottom: 17px; }
+  .registerPrompt { margin-top: 26px; }
+  .visualCopy { top: clamp(95px, 16vh, 155px); }
+  .featureBar { bottom: 4%; }
+}
+@media (min-width: 761px) and (max-height: 800px) {
+  .formPanel { padding-top: 18px; padding-bottom: 12px; }
+  .brandMark { width: 38px; height: 38px; }
+  .brandName { font-size: 25px; }
+  .formContent { margin-top: 21px; }
+  .heading { font-size: clamp(36px, 2.9vw, 41px); line-height: 1.04; }
+  .intro { margin-bottom: 14px; font-size: 14px; line-height: 1.48; }
+  .form { gap: 11px; }
+  .field { gap: 5px; }
+  .inputWrap, .loginButton, .socialButton { height: 43px; }
+  .divider { margin-top: 13px; margin-bottom: 12px; }
+  .registerPrompt { margin-top: 16px; }
+  .visualCopy { top: 15%; }
+  .visualCopy h2 { font-size: clamp(40px,3.5vw,51px); }
+  .visualEyebrow { margin-bottom: 14px; }
+  .smallRule { margin-top: 18px; margin-bottom: 16px; }
+  .visualDescription { font-size: 14px; line-height: 1.5; }
+  .featureBar { bottom: 3%; min-height: 93px; padding-top: 14px; padding-bottom: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loginButton, .inputWrap, .socialButton { transition: none; }
+  .loginButton:hover { transform: none; }
+}

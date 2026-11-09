@@ -1,0 +1,236 @@
+/* Dee's Laundromat — Registration screen
+   Desktop: strict viewport-height two-panel composition.
+   Right photo never contributes to the document's height. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 45%) minmax(0, 55%);
+  width: 100%;
+  height: 100vh;            /* fallback */
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  color: #233548;
+  background: #fefdfb;
+}
+
+/* Only the form panel scrolls, when a laptop is unusually short. */
+.formPanel {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: clamp(25px, 4.4vh, 47px) clamp(27px, 4.4vw, 82px) 30px;
+  background: #fffefc;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  white-space: nowrap;
+}
+.brand { display: inline-flex; align-items: center; flex-shrink: 0; gap: 13px; text-decoration: none; color: #233548; }
+.brandMark { width: 44px; height: 44px; flex: 0 0 44px; }
+.brandWords { display: flex; flex-direction: column; gap: 2px; }
+.brandName { font-family: 'Newsreader', Georgia, serif; font-size: clamp(22px, 1.9vw, 31px); letter-spacing: -.65px; font-weight: 600; line-height: 1.07; }
+.brandTagline { font-size: 8px; letter-spacing: 2.1px; font-weight: 700; margin-top: 4px; }
+.headerLogin { font-size: 13px; line-height: 1.5; margin: 0; color: #657185; }
+.headerLogin a, .mobileLogin a, .termsRow a { color: #2181bc; text-decoration: underline; text-underline-offset: 2px; }
+
+.formContent {
+  max-width: 575px;
+  margin-top: clamp(35px, 7vh, 88px);
+}
+.eyebrow, .visualEyebrow {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3.1px;
+  line-height: 1.5;
+  color: #4c92c4;
+}
+.heading {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 500;
+  color: #1e344d;
+  font-size: clamp(37px, 3.1vw, 49px);
+  line-height: 1.12;
+  letter-spacing: -1.05px;
+  margin: 13px 0 11px;
+}
+.intro {
+  color: #5d6c80;
+  font-size: 15px;
+  line-height: 1.72;
+  margin: 0 0 clamp(23px, 3.5vh, 35px);
+  max-width: 535px;
+}
+.form { display: flex; flex-direction: column; gap: clamp(14px, 2.3vh, 21px); }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { font-size: 14px; font-weight: 600; line-height: 1.35; }
+.inputWrap {
+  height: clamp(45px, 5.9vh, 55px);
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #cdd8e1;
+  background: #fff;
+  color: #657a91;
+  border-radius: 5px;
+  padding: 0 18px;
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+.inputWrap:focus-within { border-color: #5991ba; box-shadow: 0 0 0 3px rgb(73 142 190 / 12%); }
+.inputWrap > svg { flex: 0 0 auto; }
+.inputWrap input, .countrySelect {
+  border: none;
+  outline: none;
+  color: #233548;
+  background: none;
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 14px;
+}
+.inputWrap input { min-width: 0; flex: 1; height: 100%; }
+.inputWrap input::placeholder { color: #8191a4; opacity: 1; }
+.countrySelect { max-width: 122px; flex: 0 0 auto; cursor: pointer; text-overflow: clip; }
+.countryDivider { height: 27px; width: 1px; background: #cdd8e1; flex-shrink: 0; }
+.eyeButton { display: inline-flex; justify-content: center; align-items: center; color: #61758c; background: transparent; border: none; padding: 7px; margin-right: -7px; }
+.eyeButton:hover { color: #233548; }
+
+.termsRow { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; color: #4f5f74; line-height: 1.65; margin-top: 3px; cursor: pointer; }
+.termsRow input { flex: 0 0 20px; width: 20px; height: 20px; margin: 0; accent-color: #233548; cursor: pointer; }
+.submitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 17px;
+  height: clamp(49px, 6vh, 56px);
+  min-height: 49px;
+  width: 100%;
+  background: #233548;
+  color: #fff;
+  border: 1px solid #233548;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background .18s ease;
+}
+.submitButton:hover { background: #334c62; }
+.status { color: #426779; font-size: 13px; line-height: 1.5; margin: -5px 0 0; }
+.mobileLogin { display: none; }
+
+/* Photo is a BACKGROUND, never an intrinsically-sized <img>. */
+.visualPanel {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #dcecf8;
+}
+.visualImage {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/register-right-background.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  z-index: 0;
+}
+.visualCopy {
+  position: absolute;
+  left: 8.8%;
+  top: clamp(100px, 17vh, 190px);
+  width: min(73%, 560px);
+  color: #1b334b;
+  z-index: 1;
+}
+.visualEyebrow { margin-bottom: 28px; }
+.visualCopy h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(49px, 3.7vw, 67px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -1.2px;
+  margin: 0;
+}
+.smallRule { display: block; width: 43px; height: 1px; background: #27475d; margin: 31px 0 26px; }
+.visualCopy > p:last-child { font-size: 16px; line-height: 1.72; margin: 0; color: #344d64; }
+
+/* Narrow desktops: header fits without extending the viewport. */
+@media (max-width: 1300px) and (min-width: 761px) {
+  .formPanel { padding-left: clamp(27px, 3.5vw, 55px); padding-right: clamp(27px, 3.5vw, 55px); }
+  .brandName { font-size: clamp(22px, 2vw, 27px); }
+  .brandMark { width: 39px; height: 39px; flex-basis: 39px; }
+  .brandTagline { font-size: 7px; letter-spacing: 1.55px; }
+  .headerLogin { font-size: 11px; }
+  .heading { font-size: clamp(36px, 3.2vw, 43px); }
+  .visualCopy h2 { font-size: clamp(44px, 4vw, 55px); }
+}
+@media (max-width: 1050px) and (min-width: 761px) {
+  .page { grid-template-columns: minmax(0, 49%) minmax(0, 51%); }
+  .headerLogin { display: none; }
+  .visualCopy { left: 7%; }
+  .visualCopy > p:last-child { font-size: 14px; }
+  .desktopBreak { display: none; }
+}
+
+/* Short laptop screens: compress whitespace; form may scroll independently if needed. */
+@media (min-width: 761px) and (max-height: 850px) {
+  .formPanel { padding-top: 20px; padding-bottom: 18px; }
+  .formContent { margin-top: clamp(19px, 3.3vh, 32px); }
+  .eyebrow { font-size: 12px; }
+  .heading { font-size: clamp(34px, 2.85vw, 44px); margin: 7px 0 7px; }
+  .intro { font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+  .form { gap: 12px; }
+  .field { gap: 5px; }
+  .inputWrap { height: 44px; min-height: 44px; }
+  .termsRow { margin-top: 0; }
+  .submitButton { height: 47px; min-height: 47px; }
+  .visualCopy { top: clamp(80px, 14vh, 128px); }
+  .visualEyebrow { margin-bottom: 14px; }
+  .smallRule { margin: 17px 0 16px; }
+}
+@media (min-width: 761px) and (max-height: 680px) {
+  .brandMark { width: 36px; height: 36px; flex-basis: 36px; }
+  .formContent { margin-top: 14px; }
+  .heading { font-size: 34px; }
+  .intro { margin-bottom: 12px; }
+  .form { gap: 9px; }
+  .termsRow { font-size: 12px; }
+  .visualCopy h2 { font-size: 43px; }
+}
+
+/* Mobile: form is the whole page; scrolling is normal and intentional. */
+@media (max-width: 760px) {
+  .page { display: block; height: auto; min-height: 100dvh; overflow: visible; }
+  .formPanel { min-height: 100dvh; height: auto; overflow: visible; padding: 28px 22px 44px; }
+  .header { max-width: 510px; margin: 0 auto; }
+  .headerLogin { display: none; }
+  .brandName { font-size: 26px; }
+  .brandTagline { font-size: 8px; }
+  .formContent { margin: 60px auto 0; max-width: 510px; }
+  .heading { font-size: clamp(37px, 9vw, 47px); }
+  .intro { font-size: 15px; }
+  .form { gap: 18px; }
+  .inputWrap { height: 53px; }
+  .submitButton { height: 53px; }
+  .mobileLogin { display: block; margin: 27px 0 0; text-align: center; font-size: 14px; color: #5d6c80; }
+  .visualPanel { display: none; }
+}
+@media (max-width: 390px) {
+  .brand { gap: 9px; }
+  .brandMark { width: 37px; height: 37px; flex-basis: 37px; }
+  .brandName { font-size: 23px; }
+  .brandTagline { font-size: 7px; letter-spacing: 1.5px; }
+  .inputWrap { padding: 0 12px; gap: 10px; }
+  .countrySelect { max-width: 98px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .inputWrap, .submitButton { transition: none; }
+}

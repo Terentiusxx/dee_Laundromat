@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+*.zip
+*.sqlite3
+*.sqlite3-*
+__pycache__
+.pytest_cache
+backend/data/
+.env
+.env.*
+design-previews/
