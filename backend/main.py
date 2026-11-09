@@ -113,8 +113,11 @@ class PgRow(dict):
   return super().__getitem__(key)
 
 def pg_row_factory(cursor):
- columns=[column.name for column in cursor.description]
- return lambda values: PgRow(zip(columns,values))
+    if cursor.description is None:
+        return lambda values: values
+
+    columns = [column.name for column in cursor.description]
+    return lambda values: PgRow(zip(columns, values))
 
 class PgConnection:
  """Minimal compatibility adapter for parameterized SQLite queries."""
