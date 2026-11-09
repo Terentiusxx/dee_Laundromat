@@ -20,8 +20,8 @@ services:
       DATABASE_URL: postgres://dees:${LOCAL_POSTGRES_PASSWORD:-local-change-me}@db:5432/dees
       DEMO_MODE: "true"
       COOKIE_SECURE: "false"
-      PUBLIC_ORIGIN: http://localhost:3000
-      ALLOWED_ORIGINS: http://localhost:3000
+      PUBLIC_ORIGIN: https://web-production-8a26da.up.railway.app
+      ALLOWED_ORIGINS: https://web-production-8a26da.up.railway.app
     depends_on:
       db:
         condition: service_healthy
