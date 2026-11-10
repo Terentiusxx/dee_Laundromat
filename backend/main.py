@@ -595,8 +595,27 @@ def admin_customers(admin=Depends(admin_only)):
  with connection() as c:return [{'id':u['id'],'name':u['name'],'email':u['email'],'phone':u['phone'],'created_at':u['created_at']} for u in c.execute("SELECT * FROM users WHERE role='customer' ORDER BY id DESC")]
 @app.get('/api/admin/support')
 def admin_threads(admin=Depends(admin_only)):
- with connection() as c:
-  return [rowdict(r) for r in c.execute('''SELECT u.id as user_id,u.name,u.email,COUNT(m.id) as message_count,SUM(CASE WHEN m.sender='customer' AND m.read_by_admin=0 THEN 1 ELSE 0 END) AS unread FROM chat_messages m JOIN users u ON u.id=m.user_id GROUP BY m.user_id ORDER BY MAX(m.id) DESC''')]
+    with connection() as c:
+        return [
+            rowdict(r) for r in c.execute("""
+                SELECT
+                    u.id AS user_id,
+                    u.name,
+                    u.email,
+                    COUNT(m.id) AS message_count,
+                    SUM(
+                        CASE
+                            WHEN m.sender = 'customer'
+                            AND m.read_by_admin = 0
+                            THEN 1 ELSE 0
+                        END
+                    ) AS unread
+                FROM chat_messages m
+                JOIN users u ON u.id = m.user_id
+                GROUP BY u.id, u.name, u.email
+                ORDER BY MAX(m.id) DESC
+            """)
+        ]
 @app.get('/api/admin/support/{uid}')
 def admin_thread(uid:int,admin=Depends(admin_only)):
  with connection() as c:
